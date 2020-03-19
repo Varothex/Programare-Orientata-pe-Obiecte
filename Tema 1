@@ -11,12 +11,12 @@ class Vector
 {
 private:
     int n, *v;
-   
+
 public:
 
     friend istream& operator >>(istream& input, Vector &x1);
     friend ostream& operator <<(ostream& output, Vector x1);
-    
+
     Vector(int n, int x)                //constructor de initializare
     {
         this -> n = n;
@@ -24,37 +24,38 @@ public:
         for(int i = 0; i < n; i++)
             v[i] = x;
     }
-    
+
     int getN()
     {
         return n;
     }
-   
+
     Vector(const Vector &x1)            //constructor de copiere
     {
         n = x1.n;
+        v = new int[n];
         for(int i = 0; i < n; i++)
             v[i] = x1.v[i];
     }
-    
+
     void operator = (Vector const &x1)  //operator de atribuire
     {
         n = x1.n;
         for(int i = 0; i < n; i++)
             v[i] = x1.v[i];
     }
-    
+
     int operator [] (int i)
     {
         return v[i];
     }
-    
+
     void reactualizare(int n, int x)
     {
         for(int i = 0; i < getN(); i++)
             v[i] = x;
     }
-    
+
     int suma()
     {
         int s = 0;
@@ -62,7 +63,7 @@ public:
             s = s + v[i];
         return s;
     }
-    
+
     tuplu max()
     {
         tuplu rez;
@@ -76,7 +77,7 @@ public:
             }
         return rez;
     }
-    
+
     int sortare()
     {
         int min, aux, poz, j;
@@ -84,7 +85,7 @@ public:
         {
             min = v[i];
             poz = i;
-            for(j = i+1; j < getN(); i++)
+            for(j = i+1; j < getN(); j++)
                 if(v[j] < min)
                 {
                     min = v[j];
@@ -98,7 +99,7 @@ public:
             }
         }
     }
-    
+
     int operator * (Vector const &x1)
     {
         int p = 0;
@@ -109,11 +110,11 @@ public:
                 p += v[i] * x1.v[i];
         return p;
     }
-    
+
     ~Vector()                           //destructor
     {
         n = 0;
-        delete[] v;         
+        delete[] v;
     }
 };
 
@@ -127,19 +128,46 @@ istream& operator >> (istream &input, Vector &x1)
 
 ostream& operator << (ostream &output, Vector x1)
 {
-    output << x1.n << "\n" << "[";
+
+    int n = x1.n;
+    //output << x1.n << "\n" << "[";
+    output << "[";
     for (int i = 0; i < x1.n-1; i++)
-        output << x1.v[i] << ",";
-    //output << x1.v[n-1] << "]";
+        output << x1.v[i] << ", ";
+    output << x1.v[n-1] << "]";
     return output;
 }
 
 int main()
 {
-    /*Vector v(3, 5);
-    for(int i = 0; i < v.getN(); i++)
-       cout<<v[i]<<' ';
-    v.suma();
-    v.max();*/
+    Vector v1(1,1), v4(1,1);
+
+    cin >> v1;
+    cout << "\n";
+
+    tuplu rez = v1.max();
+    cout << "Maximul este " << rez.maxim << " pe pozitia " << rez.poz << "\n" << "\n";
+
+    cout << "Suma elementelor este: " << v1.suma() << "\n" << "\n";
+
+    v1.sortare();
+    cout << "Sortam crescator: " << "\n" << v1 << "\n" << "\n";
+
+    Vector v2 = v1;
+    cout << "Copiem v1 in v2: " << "\n" << v2 << "\n" << "\n";
+
+    Vector v3(v1);
+    cout << "Initializam v3 cu v1: " << "\n" << v3 << "\n" << "\n";
+
+    v1.reactualizare(5,9);
+    cout << "Reactualizam v1: " << "\n" << v1 << "\n" << "\n";
+
+    cout << "Produsul scalar v1*v2: " << v1*v2 << "\n" << "\n";
+
+    cout << "Suprascriem v1 folosind supraincarcarea '=' : " << "\n";
+    cin >> v4;
+    v1 = v4;
+    cout << "\n" << v1 << "\n";
+
     return 0;
 }

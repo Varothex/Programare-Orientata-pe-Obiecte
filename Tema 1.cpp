@@ -17,7 +17,7 @@ public:
     friend istream& operator >>(istream& input, Vector &x1);
     friend ostream& operator <<(ostream& output, Vector x1);
 
-    Vector(int n, int x)                //constructor de initializare
+    Vector(int n, int x)                            //constructor de initializare
     {
         this -> n = n;
         v = new int[n];
@@ -30,7 +30,7 @@ public:
         return n;
     }
 
-    Vector(const Vector &x1)            //constructor de copiere
+    Vector(const Vector &x1)                        //constructor de copiere
     {
         n = x1.n;
         v = new int[n];
@@ -38,21 +38,24 @@ public:
             v[i] = x1.v[i];
     }
 
-    void operator = (Vector const &x1)  //operator de atribuire
+    void operator = (Vector const &x1)              //operator de atribuire
     {
         n = x1.n;
         for(int i = 0; i < n; i++)
             v[i] = x1.v[i];
     }
 
-    int operator [] (int i)
+    /*int operator [] (int i)
     {
         return v[i];
-    }
+    }*/
 
     void reactualizare(int n, int x)
     {
-        for(int i = 0; i < getN(); i++)
+        delete[] v;
+        this -> n = n;
+        v = new int[n];
+        for(int i = 0; i < n; i++)
             v[i] = x;
     }
 
@@ -111,26 +114,27 @@ public:
         return p;
     }
 
-    ~Vector()                           //destructor
+    ~Vector()                                       //destructor
     {
         n = 0;
         delete[] v;
     }
 };
 
-istream& operator >> (istream &input, Vector &x1)
+istream& operator >> (istream &input, Vector &x1)   //input
 {
+    delete[] x1.v;
     input >> x1.n;
+    x1.v = new int[x1.n];
     for (int i = 0; i < x1.n; i++)
         input >> x1.v[i];
     return input;
 }
 
-ostream& operator << (ostream &output, Vector x1)
+ostream& operator << (ostream &output, Vector x1)   //output
 {
 
     int n = x1.n;
-    //output << x1.n << "\n" << "[";
     output << "[";
     for (int i = 0; i < x1.n-1; i++)
         output << x1.v[i] << ", ";
@@ -159,7 +163,7 @@ int main()
     Vector v3(v1);
     cout << "Initializam v3 cu v1: " << "\n" << v3 << "\n" << "\n";
 
-    v1.reactualizare(5,9);
+    v1.reactualizare(6,9);
     cout << "Reactualizam v1: " << "\n" << v1 << "\n" << "\n";
 
     cout << "Produsul scalar v1*v2: " << v1*v2 << "\n" << "\n";

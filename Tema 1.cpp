@@ -17,7 +17,7 @@ public:
     friend istream& operator >>(istream& input, Vector &x1);
     friend ostream& operator <<(ostream& output, Vector x1);
 
-    Vector(int n, int x)                            //constructor de initializare
+    Vector(int n=1, int x=0)                            //constructor de initializare
     {
         this -> n = n;
         v = new int[n];
@@ -38,17 +38,17 @@ public:
             v[i] = x1.v[i];
     }
 
-    void operator = (Vector const &x1)              //operator de atribuire
+    void operator = (Vector &x1)                    //operator de atribuire
     {
         n = x1.n;
         for(int i = 0; i < n; i++)
-            v[i] = x1.v[i];
+            v[i] = x1[i];
     }
 
-    /*int operator [] (int i)
+    int& operator [] (int i)
     {
         return v[i];
-    }*/
+    }
 
     void reactualizare(int n, int x)
     {
@@ -127,7 +127,7 @@ istream& operator >> (istream &input, Vector &x1)   //input
     input >> x1.n;
     x1.v = new int[x1.n];
     for (int i = 0; i < x1.n; i++)
-        input >> x1.v[i];
+        input >> x1[i];
     return input;
 }
 
@@ -137,15 +137,14 @@ ostream& operator << (ostream &output, Vector x1)   //output
     int n = x1.n;
     output << "[";
     for (int i = 0; i < x1.n-1; i++)
-        output << x1.v[i] << ", ";
-    output << x1.v[n-1] << "]";
+        output << x1[i] << ", ";
+    output << x1[n-1] << "]";
     return output;
 }
 
 int main()
 {
-    Vector v1(1,1), v4(1,1);
-
+    Vector v1, v4;
     cin >> v1;
     cout << "\n";
 

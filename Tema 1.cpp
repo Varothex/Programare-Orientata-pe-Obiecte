@@ -14,10 +14,10 @@ private:
 
 public:
 
-    friend istream& operator >>(istream& input, Vector &x1);
+    friend istream& operator >>(istream& input, Vector& x1);
     friend ostream& operator <<(ostream& output, Vector x1);
 
-    Vector(int n=1, int x=0)                            //constructor de initializare
+    Vector(int n=1, int x=0)                        //constructor de initializare
     {
         this -> n = n;
         v = new int[n];
@@ -30,7 +30,7 @@ public:
         return n;
     }
 
-    Vector(const Vector &x1)                        //constructor de copiere
+    Vector(const Vector& x1)                        //constructor de copiere
     {
         n = x1.n;
         v = new int[n];
@@ -38,11 +38,12 @@ public:
             v[i] = x1.v[i];
     }
 
-    void operator = (Vector &x1)                    //operator de atribuire
+    Vector& operator = (Vector const &x1)           //operator de atribuire
     {
-        n = x1.n;
-        for(int i = 0; i < n; i++)
-            v[i] = x1[i];
+        this -> n =  x1.n;
+        for (int i = 0; i < x1.n; i++)
+            this -> v[i] = x1.v[i];
+        return *this;
     }
 
     int& operator [] (int i)

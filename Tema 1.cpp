@@ -84,7 +84,7 @@ public:
         return rez;
     }
 
-    int sortare()
+    void sortare()
     {
         int min, aux, poz, j;
         for(int i = 0; i < getN()-1; i++)

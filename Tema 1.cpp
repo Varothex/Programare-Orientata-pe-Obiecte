@@ -40,7 +40,9 @@ public:
 
     Vector& operator = (Vector const &x1)           //operator de atribuire
     {
+        delete[] v;
         this -> n =  x1.n;
+        v = new int[n];
         for (int i = 0; i < x1.n; i++)
             this -> v[i] = x1.v[i];
         return *this;
@@ -82,7 +84,7 @@ public:
         return rez;
     }
 
-    void sortare()
+    int sortare()
     {
         int min, aux, poz, j;
         for(int i = 0; i < getN()-1; i++)

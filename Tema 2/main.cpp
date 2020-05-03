@@ -26,6 +26,8 @@ a ireductibilitatii polinoamelor. (Webografie ajutatoare: http://www.profesoronl
 
 int main()
 {
+    // Inca nu e gata, o sa mai lucrez la el si sper sa fie gata cat de curand. :D
+    
     Monom x(3, 4.0), y(4, 5.0), z(5, 6.0);
     x.print();
     y.print();

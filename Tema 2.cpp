@@ -26,54 +26,67 @@ class Monom
 {
     int grad;
     float coef;
-    
-    public:
-        
-        /*Monom(g=0, c=0)                           //constructor de initializare
-        {
-            mon = new int[grad];
-        
-        }
-        
-        Vector(const Vector& x1)                    //constructor de copiere
-        {
-            n = x1.n;
-            v = new int[n];
-            for(int i = 0; i < n; i++)
-                v[i] = x1.v[i];
-        }
-        
-        ~Vector()                                   //destructor
-        {
-            n = 0;
-            delete[] v;
-        }*/
+
+public:
+
+    friend class Polinom;
+
+    Monom(int g, float c)
+    {
+        grad = g;
+        coef = c;
+    }
+
+    void print()
+    {
+        cout << coef << "x^" << grad << "\n";
+    }
 };
 
 class Polinom
 {
-    int nr_monoame, Monom *m;
+    int nr_monoame;
+    Monom *m;
+    int *poli;
+
+public:
+
+    Polinom(int n)
+    {
+        nr_monoame = n;
+        poli = new int[n];
+        for(int i = 1; i <= n; i++)
+            poli[i] = 0;
+    }
+
+    void add(Monom *mo)
+    {
+        m = mo;
+        poli[m -> grad] = m -> coef;
+    }
+
+    void print()
+    {
+        for(int i = nr_monoame; i > 0; i--)
+            cout << poli[i] << "x^" << i << " ";
+        cout << "\n";
+    }
+
 };
-
-istream& operator >> (istream &input, Monom &mon1)
-{
-    input >> mon1.grad;                             //citim gradul = index
-    input >> mon1.coef;                             //citim coef = element
-    return input;
-}
-
-/*ostream& operator << (ostream &output, Monom mon1)//output
-{
-    int n = x1.n;
-    output << "[";
-    for (int i = 0; i < x1.n-1; i++)
-        output << x1[i] << ", ";
-    output << x1[n-1] << "]";
-    return output;
-}*/
 
 int main()
 {
-    
+    Monom x(3, 4.0), y(4, 5.0), z(5, 6.0);
+    x.print();
+    y.print();
+    z.print();
+    //! Citim Polinom(grad) pentru a face loc in vector. Dupa, in functie de grad, citim
+    //! monoamele si le copiem in vector, fiecare pe casuta corespunzatoare gradului lui
+    Polinom a(5);
+    a.add(&x);
+    a.add(&y);
+    a.add(&z);
+    cout << "\n";
+    a.print();
     return 0;
 }

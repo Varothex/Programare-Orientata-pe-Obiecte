@@ -60,12 +60,14 @@ bool Polinom::ireductibil()
         if(poli[i])
             for(j = i-1; j >= 0; j--)
                 if(poli[j])
-                    if(prime(poli[i], poli[j]) != 1)
+                {
+                    cout << poli[j];  //! ???????
+                    if(prime(int(poli[i]), int(poli[j])) != 1)
                     {
                         cout << "Criteriul nu functioneaza pe acest caz.";
                         return 0;
                     }
-
+                }
     for(i = 0; i <= nr_monoame; i++)
             if(poli[i])
             {
@@ -91,11 +93,9 @@ bool Polinom::ireductibil()
         for(j = 3; j <= nr_monoame; j += 2)
             if(p[j] == 0)
             {
-                cout << j << " ";
                 for(i = nr_monoame-1; i >= 0; i--)
                     if(poli[i] and (int(poli[i]) % j != 0))
                     {
-                        cout << "Am ajuns pana aici!";
                         ok = 0;
                         break;
                     }

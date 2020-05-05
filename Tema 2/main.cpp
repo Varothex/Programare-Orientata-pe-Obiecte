@@ -21,24 +21,44 @@ Polinom_Ireductibil și pentru Polinom_reductibil:
 Afisarea unui polinom reductibil să fie făcută ca produs de 2 polinoame.
 
 Clasa derivata trebuie sa contina o metoda care sa aplice criteriul lui Eisenstein de verificare
-a ireductibilitatii polinoamelor. (Webografie ajutatoare: http://www.profesoronline.ro/teorie-
-3140-1.html)*/
+a ireductibilitatii polinoamelor.*/
 
 int main()
 {
-    // Inca nu e gata, o sa mai lucrez la el si sper sa fie gata cat de curand. :D
-    
     Monom x(3, 4.0), y(4, 5.0), z(5, 6.0);
     x.print();
     y.print();
     z.print();
+
+    Polinom xyz(5);
+    xyz.add(&x);
+    xyz.add(&y);
+    xyz.add(&z);
+    xyz.print();
+
+    if(xyz.ireductibil())
+        cout << "Este ireductibil.";
+
+    cout << "\n" << "\n";
+
+    Monom a(1, 3.2), b(4, 34.1), c(10, 1);
+    a.print();
+    b.print();
+    c.print();
+
+    Polinom abc(10);
+    abc.add(&a);
+    abc.add(&b);
+    abc.add(&c);
+
+
     cout << "\n";
 
-    Polinom a(5);
-    a.add(&x);
-    a.add(&y);
-    a.add(&z);
-    a.print();
+    if(abc.ireductibil())
+        cout << "Este ireductibil.";
+
+    abc.print();
+    abc.print();
 
     return 0;
 }

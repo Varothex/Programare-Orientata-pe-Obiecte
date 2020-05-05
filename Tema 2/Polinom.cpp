@@ -3,7 +3,7 @@
 
 using namespace std;
 
-bool p[1000];       // E global temporar, nu stiam cum sa-l fac altfel.
+bool p[1000];
 
 int prime(int A, int B)
 {
@@ -33,7 +33,7 @@ Polinom::Polinom(int n)
 {
     nr_monoame = n;
     poli = new float[n];
-    for(int i = 0; i < n; i++)
+    for(int i = 0; i <= n; i++)
         poli[i] = 0;
 }
 
@@ -51,7 +51,7 @@ Daca exista un numar prim p, astfel incat p|ai, oricare ar fi iЄ[0,n-1],
 
 p nu divide pe an  si p² nu divide pe ao, atunci f este ireductibil.*/
 
-bool Polinom::ireductibil()         // Inca nu merge.
+bool Polinom::ireductibil()
 {
     int i, j, inceput;
     bool ok = 1;
@@ -61,7 +61,10 @@ bool Polinom::ireductibil()         // Inca nu merge.
             for(j = i-1; j >= 0; j--)
                 if(poli[j])
                     if(prime(poli[i], poli[j]) != 1)
+                    {
+                        cout << "Criteriul nu functioneaza pe acest caz.";
                         return 0;
+                    }
 
     for(i = 0; i <= nr_monoame; i++)
             if(poli[i])
@@ -88,18 +91,21 @@ bool Polinom::ireductibil()         // Inca nu merge.
         for(j = 3; j <= nr_monoame; j += 2)
             if(p[j] == 0)
             {
+                cout << j << " ";
                 for(i = nr_monoame-1; i >= 0; i--)
-                    if(poli[i] and (int(poli[i]) % int(p[j]) != 0))
+                    if(poli[i] and (int(poli[i]) % j != 0))
                     {
+                        cout << "Am ajuns pana aici!";
                         ok = 0;
                         break;
                     }
                 if(ok)
-                    if(int(poli[nr_monoame]) % int(p[j]) != 0 and inceput % (p[j]*p[j]) != 0)
+                    if(int(poli[nr_monoame]) % int(j != 0 and inceput % (j*j) != 0))
                         return 1;
             }
     }
     return 0;
+
 }
 
 void Polinom::print()

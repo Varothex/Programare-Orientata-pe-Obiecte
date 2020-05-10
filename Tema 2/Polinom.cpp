@@ -32,7 +32,7 @@ bool ciur(int n)
 Polinom::Polinom(int n)
 {
     nr_monoame = n;
-    poli = new float[n];
+    poli = new float[n+1];
     for(int i = 0; i <= n; i++)
         poli[i] = 0;
 }
@@ -58,23 +58,38 @@ bool Polinom::ireductibil()
 
     for(i = nr_monoame; i > 0; i--)
         if(poli[i])
-            for(j = i-1; j >= 0; j--)
-                if(poli[j])
+        {
+            if(int(poli[i]) == poli[i])
+            {
+                if(poli[i] == 1)
                 {
-                    cout << poli[j];  //! ???????
-                    if(prime(int(poli[i]), int(poli[j])) != 1)
-                    {
-                        cout << "Criteriul nu functioneaza pe acest caz.";
-                        return 0;
-                    }
+                    cout << "Criteriul nu functioneaza pe acest caz: coeficientii nu sunt primi intre ei.\n";
+                    return 0;
                 }
+                else
+                {
+                    for(j = i-1; j >= 0; j--)
+                        if(poli[j])
+                            if(prime(int(poli[i]), int(poli[j])) != 1)
+                            {
+                                cout << "Criteriul nu functioneaza pe acest caz: coeficientii nu sunt primi intre ei.\n";
+                                return 0;
+                            }
+                }
+            }
+            else
+            {
+                cout << "Criteriul nu functioneaza pe acest caz: coeficientii nu sunt numere naturale.\n";
+                return 0;
+            }
+        }
+
     for(i = 0; i <= nr_monoame; i++)
             if(poli[i])
             {
                 inceput = poli[i];
                 break;
             }
-
     for(int i = nr_monoame-1; i >= 0; i--)
         if(int(poli[i]) and (int(poli[i]) % 2 != 0))
         {
@@ -86,7 +101,6 @@ bool Polinom::ireductibil()
         if(int(poli[nr_monoame]) % 2 != 0 and inceput % 4 != 0)
             return 1;
     }
-
     else
     {
         ok = 1;
@@ -101,11 +115,14 @@ bool Polinom::ireductibil()
                     }
                 if(ok)
                     if(int(poli[nr_monoame]) % int(j != 0 and inceput % (j*j) != 0))
-                        return 1;
+                    {
+                        cout << "Este ireductibil.\n";
+                        return 0;
+                    }
             }
     }
+    cout << "Este reductibil.\n";
     return 0;
-
 }
 
 void Polinom::print()

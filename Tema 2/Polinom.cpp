@@ -37,19 +37,19 @@ Polinom::Polinom(int n)
         poli[i] = 0;
 }
 
+Polinom::Polinom(const Polinom &p)
+{
+  nr_monoame = p.nr_monoame;
+  poli = new float[nr_monoame+1];
+    for(int i = 0; i <= nr_monoame; i++)
+        poli[i] = p.poli[i];
+}
+
 void Polinom::add(Monom *mo)
 {
     m = mo;
     poli[m -> grad] += m -> coef;
 }
-
-/*Fie polinomul f, cu coeficienti intregi, de forma
-
-f=a_{\circ}+a_1X+a_2X^2+\cdots+a_nX^n,\;n\ge{1}, astfel incat coeficientii sai sa fie primi intre ei.
-
-Daca exista un numar prim p, astfel incat p|ai, oricare ar fi iЄ[0,n-1],
-
-p nu divide pe an  si p² nu divide pe ao, atunci f este ireductibil.*/
 
 bool Polinom::ireductibil()
 {

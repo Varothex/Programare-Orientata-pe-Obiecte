@@ -4,17 +4,24 @@
 
 class Polinom
 {
-    int nr_monoame, *poli;
-    Monom *m;
-
     public:
+        int nr_monoame;
+        float *poli;
+        Monom *m;
+
+        friend class Polinom_ireductibil;
+
         Polinom(int n);
 
+        Polinom(const Polinom &p);
+
         void add(Monom *mo);
+
+        bool ireductibil();
 
         void print();
 
         ~Polinom();
 };
 
-#endif // POLINOM_H
+#endif

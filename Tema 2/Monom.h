@@ -1,22 +1,30 @@
+#include <iostream>
 #ifndef MONOM_H
 #define MONOM_H
 
+using namespace std;
 
 class Monom
 {
+public:
     int grad;
     float coef;
 
-    public:
-        friend class Polinom;
+    friend class Polinom;
 
-        Monom(int g=0, float c=0);
+    friend istream &operator >>(istream& input, Monom &m1);
 
-        Monom(const Monom &mon);
+    friend ostream &operator <<(ostream& output, Monom m1);
 
-        void print();
+    Monom &operator = (Monom const &m1) = default;
 
-        ~Monom();
+    Monom(int g=0, float c=0);
+
+    Monom(const Monom &mon);
+
+    ~Monom();
+
+    void print();
 };
 
-#endif // MONOM_H
+#endif

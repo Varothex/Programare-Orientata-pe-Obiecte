@@ -4,24 +4,28 @@
 
 class Polinom
 {
-    public:
-        int nr_monoame;
-        float *poli;
-        Monom *m;
+public:
+    int nr_monoame, gradmax;
+    float *poli;
+    Monom *m;
 
-        friend class Polinom_ireductibil;
+    friend class Polinom_ireductibil;
 
-        Polinom(int n);
+    friend istream &operator >>(istream& input, Polinom &p1);
 
-        Polinom(const Polinom &p);
+    friend ostream &operator <<(ostream& output, Polinom p1);
 
-        void add(Monom *mo);
+    Polinom(int n=1);
 
-        bool ireductibil();
+    Polinom(const Polinom &p);
 
-        void print();
+    ~Polinom();
 
-        ~Polinom();
+    void add(Monom *mo);
+
+    bool ireductibil();
+
+    void print();
 };
 
 #endif

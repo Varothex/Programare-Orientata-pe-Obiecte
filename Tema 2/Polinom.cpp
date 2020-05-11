@@ -3,6 +3,53 @@
 
 using namespace std;
 
+istream &operator >> (istream &input, Polinom &p1)
+{
+    Monom m;
+    delete[] p1.poli;
+    input >> p1.gradmax;
+    input >> p1.nr_monoame;
+    p1.poli = new float[p1.gradmax+1];
+    for(int i = 0; i <= p1.gradmax; i++)
+        p1.poli[i] = 0;
+    for (int i = 0; i < p1.nr_monoame; i++)
+    {
+        input >> m;
+        p1.poli[m.grad] += m.coef;
+    }
+    return input;
+}
+
+ostream &operator << (ostream &output, Polinom p1)
+{
+    for (int i = p1.gradmax; i >= 0; i--)
+        output << p1.poli[i] << "x^" << i << " ";
+    output << "\n";
+    return output;
+}
+
+Polinom::Polinom(int n)
+{
+    nr_monoame = n;
+    poli = new float[n+1];
+    for(int i = 0; i <= n; i++)
+        poli[i] = 0;
+}
+
+Polinom::Polinom(const Polinom &p)
+{
+    nr_monoame = p.nr_monoame;
+    poli = new float[nr_monoame+1];
+    for(int i = 0; i <= nr_monoame; i++)
+        poli[i] = p.poli[i];
+}
+
+Polinom::~Polinom()
+{
+    nr_monoame = 0;
+    delete[] poli;
+}
+
 bool p[1000];
 
 int prime(int A, int B)
@@ -12,7 +59,7 @@ int prime(int A, int B)
     return prime(B, A%B);
 }
 
-bool ciur(int n)
+void ciur(int n)
 {
     int i, j;
 
@@ -26,23 +73,6 @@ bool ciur(int n)
         if(p[i] == 0)
             for(j = 2; j <= n/i; j++)
                 p[i*j] = 1;
-    return p;
-}
-
-Polinom::Polinom(int n)
-{
-    nr_monoame = n;
-    poli = new float[n+1];
-    for(int i = 0; i <= n; i++)
-        poli[i] = 0;
-}
-
-Polinom::Polinom(const Polinom &p)
-{
-  nr_monoame = p.nr_monoame;
-  poli = new float[nr_monoame+1];
-    for(int i = 0; i <= nr_monoame; i++)
-        poli[i] = p.poli[i];
 }
 
 void Polinom::add(Monom *mo)
@@ -85,11 +115,11 @@ bool Polinom::ireductibil()
         }
 
     for(i = 0; i <= nr_monoame; i++)
-            if(poli[i])
-            {
-                inceput = poli[i];
-                break;
-            }
+        if(poli[i])
+        {
+            inceput = poli[i];
+            break;
+        }
     for(int i = nr_monoame-1; i >= 0; i--)
         if(int(poli[i]) and (int(poli[i]) % 2 != 0))
         {
@@ -130,10 +160,4 @@ void Polinom::print()
     for(int i = nr_monoame; i >= 0; i--)
         cout << poli[i] << "x^" << i << " ";
     cout << "\n";
-}
-
-Polinom::~Polinom()
-{
-    nr_monoame = 0;
-    delete[] poli;
 }

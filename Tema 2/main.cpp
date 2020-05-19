@@ -9,9 +9,9 @@ int main()
 {
     /*Monom x, y, z;
     cin >> x >> y >> z;
-    cout << x << y << z;*/
+    cout << x << y << z;
 
-    /*Monom copiex = x;
+    Monom copiex = x;
     cout << copiex;*/
 
     Monom x(3, 4.0), y(4, 5.0), z(5, 6.0);
@@ -19,7 +19,7 @@ int main()
     y.print();
     z.print();
 
-    Polinom xyz(5);
+    Polinom_ireductibil xyz(5);
     xyz.add(&x);
     xyz.add(&y);
     xyz.add(&z);
@@ -29,27 +29,26 @@ int main()
 
     cout << "\n";
 
-
     /*Monom a, b, c;
     cin >> a >> b >> c;
-    cout << a << b << c;*/
-
-    /*Monom a(1, 3), b(5, 34), c(10, 5);
-    a.print();
-    b.print();
-    c.print();*/
+    cout << a << b << c;
 
     Polinom abc;
     cin >> abc;
-    cout << abc;
+    cout << abc;*/
 
-    /*Polinom abc(10);
+    Monom a(1, 3), b(5, 34), c(10, 5);
+    a.print();
+    b.print();
+    c.print();
+
+    Polinom_ireductibil abc(10);
     abc.add(&a);
     abc.add(&b);
     abc.add(&c);
-    abc.print();*/
+    abc.print();
 
-    //abc.ireductibil();
+    abc.ireductibil();
 
     /*Polinom_ireductibil qwerty;
     cout << qwerty.nr_monoame;

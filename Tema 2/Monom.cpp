@@ -1,4 +1,3 @@
-//#include <iostream>
 #include "Monom.h"
 
 using namespace std;

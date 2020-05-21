@@ -1,4 +1,4 @@
-#include <iostream>
+#include <bits/stdc++.h>
 #include "Polinom_ireductibil.h"
 
 using namespace std;
@@ -50,8 +50,6 @@ Polinom_ireductibil::~Polinom_ireductibil()
     delete[] poli;
 }
 
-bool p[1000];
-
 int prime(int A, int B)
 {
     if(!B)
@@ -59,26 +57,28 @@ int prime(int A, int B)
     return prime(B, A%B);
 }
 
-void ciur(int n)
-{
-    int i, j;
-
-    for(i = 0; i <= n; i++)
-        p[i] = 0;
-    p[0] = 1;
-    p[1] = 1;
-    for(i = 4; i <= n; i += 2)
-        p[i] = 1;
-    for(i = 3; i <= n; i += 2)
-        if(p[i] == 0)
-            for(j = 2; j <= n/i; j++)
-                p[i*j] = 1;
-}
-
 bool Polinom_ireductibil::ireductibil()
 {
     int i, j, inceput;
+    float maxi=-999999;
     bool ok = 1;
+
+    //! maxi = *max_element (poli.begin(), poli.end());
+
+    for (i = 0; i <= nr_monoame; i++)
+        if (maxi < poli[i])
+            maxi = poli[i];
+
+    vector<bool> p;
+    p.assign(maxi, 0);
+    p[0] = 1;
+    p[1] = 1;
+    for(i = 4; i <= maxi; i += 2)
+        p[i] = 1;
+    for(i = 3; i <= maxi; i += 2)
+        if(p[i] == 0)
+            for(j = 2; j <= maxi/i; j++)
+                p[i*j] = 1;
 
     for(i = nr_monoame; i > 0; i--)
         if(poli[i])
@@ -114,6 +114,7 @@ bool Polinom_ireductibil::ireductibil()
             inceput = poli[i];
             break;
         }
+
     for(int i = nr_monoame-1; i >= 0; i--)
         if(int(poli[i]) and (int(poli[i]) % 2 != 0))
         {
@@ -128,7 +129,7 @@ bool Polinom_ireductibil::ireductibil()
     else
     {
         ok = 1;
-        for(j = 3; j <= nr_monoame; j += 2)
+        for(j = 3; j <= maxi; j += 2)
             if(p[j] == 0)
             {
                 for(i = nr_monoame-1; i >= 0; i--)

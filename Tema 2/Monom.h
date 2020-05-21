@@ -1,25 +1,28 @@
-#include <iostream>
+#include <bits/stdc++.h>
 #ifndef MONOM_H
 #define MONOM_H
-
-using namespace std;
 
 //template <class T>
 class Monom
 {
+
 public:
     int grad;
     float coef;
 
     friend class Polinom;
 
-    friend istream &operator >>(istream& input, Monom &m1);
+    friend std::istream &operator >>(std::istream &input, Monom &m1);
 
-    friend ostream &operator <<(ostream& output, Monom m1);
+    friend std::ostream &operator <<(std::ostream &output, Monom m1);
 
     Monom &operator = (Monom const &m1) = default;
 
-    Monom(int g=0, float c=0);
+    Monom(int g=0, float c=0)
+    {
+        grad = g;
+        coef = c;
+    }
 
     Monom(const Monom &mon);
 

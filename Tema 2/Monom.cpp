@@ -15,12 +15,6 @@ ostream &operator << (ostream &output, Monom m1)
     return output;
 }
 
-Monom::Monom(int g, float c)
-{
-    grad = g;
-    coef = c;
-}
-
 Monom::Monom(const Monom &mon) = default;
 
 Monom::~Monom() = default;

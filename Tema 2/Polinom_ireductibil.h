@@ -6,9 +6,9 @@ class Polinom_ireductibil: public Polinom
 {
 public:
 
-    friend istream &operator >>(istream& input, Polinom &p1);
+    friend std::istream &operator >>(std::istream &input, Polinom &p1);
 
-    friend ostream &operator <<(ostream& output, Polinom p1);
+    friend std::ostream &operator <<(std::ostream &output, Polinom p1);
 
     Polinom_ireductibil(int n=1);
 
